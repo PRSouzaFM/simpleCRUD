@@ -23,6 +23,7 @@ db.run(`CREATE TABLE IF NOT EXISTS users (
   password TEXT NOT NULL
 )`);
 
+
 app.post('/login', async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -38,11 +39,12 @@ app.post('/login', async (req, res) => {
           const token = jwt.sign({ userId: row.id }, JWT_SECRET);
           res.cookie('token', token, {
             expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 1 day
-            path: '/protected', // set the path to the protected page
+            path: '/',
+            domain: 'localhost',
             httpOnly: true,
             secure: true
           });
-          res.status(200).send("Logged in")
+          res.send({ token });
         } else {
           res.status(401).send('Invalid username or password');
         }
@@ -53,10 +55,6 @@ app.post('/login', async (req, res) => {
     res.status(500).send('Error logging in');
   }
 });
-
-
-
-
 // Register route
 app.post('/register', async (req, res) => {
   console.log(req.headers)
