@@ -1,8 +1,10 @@
-
+import { useEffect } from "react";
 import withAuthentication from "./withAuthentication";
 
 function ProtectedComponent() {
-  return <div>This component is protected and can only be accessed if the user is authenticated.</div>;
+  useEffect(() => {
+  }, [])
+  return <div>Hello, {localStorage.getItem('name')}</div>;
 }
 
 export default withAuthentication(ProtectedComponent);

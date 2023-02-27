@@ -21,11 +21,7 @@ function Login() {
         'Origin': 'http://localhost:3000'
       },
       body: JSON.stringify({ ...formData })
-    }).then(response => {
-      if (response.status == 200) {
-        window.location.href = '/protected'
-      }
-    })
+    }).then(response => response.json()).then(data => localStorage.setItem('name', data.username)).then(window.location.href = '/protected')
   }
 
 

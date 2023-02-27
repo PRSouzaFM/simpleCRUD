@@ -45,7 +45,7 @@ function Login() {
         </Form.Group>
 
         <Button className="submit-button" variant="primary" type="submit">
-          Login
+          REGISTER
         </Button>
       </Form>
     </div>

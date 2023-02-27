@@ -44,7 +44,7 @@ app.post('/login', async (req, res) => {
             httpOnly: true,
             secure: true
           });
-          res.send({ token });
+          res.send({ token, "username": username });
         } else {
           res.status(401).send('Invalid username or password');
         }
@@ -57,7 +57,6 @@ app.post('/login', async (req, res) => {
 });
 // Register route
 app.post('/register', async (req, res) => {
-  console.log(req.headers)
   try {
     const { username, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
